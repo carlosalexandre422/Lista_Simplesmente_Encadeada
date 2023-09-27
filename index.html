@@ -243,7 +243,6 @@
         listItem.textContent = aux.getConteudo();
         listContainer.appendChild(listItem);
 
-        // Adicione o símbolo de bi-condicional (↔) se houver um próximo elemento
         if (aux.getProx() !== null) {
           const arrow = document.createElement('span');
           arrow.className = 'arrow';

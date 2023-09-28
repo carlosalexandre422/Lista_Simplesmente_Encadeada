@@ -180,6 +180,23 @@
         this.nElementos++;
         return true;
       }
+      insereFimLista(valor) {
+        let novoNo = new No();
+        novoNo.setConteudo(valor);
+
+        if (this.vazia()) {
+          this.cabeca = novoNo;
+        } else {
+          let aux = this.cabeca;
+          while (aux.getProx() !== null) {
+            aux = aux.getProx();
+          }
+          aux.setProx(novoNo);
+        }
+
+        this.nElementos++;
+        return true;
+      }
 
       insere(pos, valor) {
         if (this.vazia() && pos !== 1) {
@@ -214,6 +231,30 @@
         let atual = antecessor.getProx();
         let valorRemovido = atual.getConteudo();
         antecessor.setProx(atual.getProx());
+        this.nElementos--;
+        atual = null;
+        return valorRemovido;
+      }
+
+      removeFimLista() {
+        if (this.vazia()) {
+          return -1;
+        }
+
+        let antecessor = null;
+        let atual = this.cabeca;
+        while (atual.getProx() !== null) {
+          antecessor = atual;
+          atual = atual.getProx();
+        }
+
+        let valorRemovido = atual.getConteudo();
+        if (antecessor === null) {
+          this.cabeca = null;
+        } else {
+          antecessor.setProx(null);
+        }
+
         this.nElementos--;
         atual = null;
         return valorRemovido;
@@ -315,7 +356,7 @@
 
     function inserirFinal() {
       const valor = parseInt(prompt('Digite o valor a ser inserido no final:'));
-      const sucesso = lista.insere(lista.tamanho() + 1, valor);
+      const sucesso = lista.insereFimLista(valor);
       if (sucesso) {
         alert('Elemento inserido no final com sucesso!');
       } else {
@@ -325,7 +366,7 @@
     }
 
     function removerInicio() {
-      const valorRemovido = lista.remove(1);
+      const valorRemovido = lista.removeInicioLista();
       if (valorRemovido !== -1) {
         alert(`Elemento ${valorRemovido} removido do início com sucesso!`);
       } else {
@@ -335,7 +376,7 @@
     }
 
     function removerFinal() {
-      const valorRemovido = lista.remove(lista.tamanho());
+      const valorRemovido = lista.removeFimLista();
       if (valorRemovido !== -1) {
         alert(`Elemento ${valorRemovido} removido do final com sucesso!`);
       } else {

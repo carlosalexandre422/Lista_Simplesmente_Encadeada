@@ -120,10 +120,12 @@
 
       elemento(pos) {
         if (this.vazia()) {
+          alert('Lista vazia.')
           return -1;
         }
 
         if (pos < 1 || pos > this.tamanho() || isNaN(pos)) {
+          alert('Posição inválida.')
           return -1;
         }
 
@@ -136,7 +138,12 @@
       }
 
       posicao(dado) {
-        if (this.vazia() || isNaN(dado)) {
+        if (this.vazia()) {
+          alert('Lista vazia.');
+          return -1;
+        }
+        if (isNaN(dado)) {
+          alert('Valor inválido.');
           return -1;
         }
 
@@ -149,12 +156,13 @@
           aux = aux.getProx();
           cont++;
         }
-
+        alert('Valor não encontrado na lista.');
         return -1;
       }
 
       insereInicioLista(valor) {
         if(isNaN(valor)){
+          alert('Valor inválido.');
           return false;
         }
         let novoNo = new No();
@@ -181,6 +189,11 @@
         return true;
       }
       insereFimLista(valor) {
+        if(isNaN(valor)){
+          alert('Valor inválido.')
+          return false;
+        }
+
         let novoNo = new No();
         novoNo.setConteudo(valor);
 
@@ -200,10 +213,17 @@
 
       insere(pos, valor) {
         if (this.vazia() && pos !== 1) {
+          alert('Lista vazia. Insira na posição 1.');
           return false;
         }
 
-        if (pos <= 0 || pos > this.nElementos + 1 || isNaN(pos) || isNaN(valor)) {
+        if (pos <= 0 || pos > this.nElementos + 1 || isNaN(pos)) {
+          alert('Posição inválida.');
+          return false;
+        }
+
+        if (isNaN(valor)) {
+          alert('Valor inválido.');
           return false;
         }
 
@@ -215,6 +235,10 @@
       }
 
       removeInicioLista() {
+        if(lista.vazia()){
+          alert('A lista está vazia.')
+          return -1;
+        }
         let p = this.cabeca;
         let valorRemovido = p.getConteudo();
         this.cabeca = p.getProx();
@@ -238,6 +262,7 @@
 
       removeFimLista() {
         if (this.vazia()) {
+          alert('A lista está vazia.')
           return -1;
         }
 
@@ -262,10 +287,12 @@
 
       remove(pos) {
         if (this.vazia()) {
+          alert('A lista está vazia.')
           return -1;
         }
 
         if (pos <= 0 || pos > this.nElementos || isNaN(pos)) {
+          alert('Posição inválida.')
           return -1;
         }
 
@@ -306,8 +333,6 @@
       const sucesso = lista.insere(pos, valor);
       if (sucesso) {
         alert('Elemento inserido com sucesso!');
-      } else {
-        alert('Inserção falhou. Verifique a posição.');
       }
       renderizarLista();
     }
@@ -317,8 +342,6 @@
       const valorRemovido = lista.remove(pos);
       if (valorRemovido !== -1) {
         alert(`Elemento ${valorRemovido} removido com sucesso!`);
-      } else {
-        alert('Remoção falhou. Verifique a posição.');
       }
       renderizarLista();
     }
@@ -328,8 +351,6 @@
       const posicao = lista.posicao(valor);
       if (posicao !== -1) {
         alert(`O valor ${valor} está na posição ${posicao}`);
-      } else {
-        alert('Valor não encontrado na lista.');
       }
     }
 
@@ -338,8 +359,6 @@
       const elemento = lista.elemento(pos);
       if (elemento !== -1) {
         alert(`O elemento na posição ${pos} é ${elemento}`);
-      } else {
-        alert('Posição inválida.');
       }
     }
 
@@ -348,8 +367,6 @@
       const sucesso = lista.insereInicioLista(valor);
       if (sucesso) {
         alert('Elemento inserido no início com sucesso!');
-      } else {
-        alert('Inserção no início falhou.');
       }
       renderizarLista();
     }
@@ -359,8 +376,6 @@
       const sucesso = lista.insereFimLista(valor);
       if (sucesso) {
         alert('Elemento inserido no final com sucesso!');
-      } else {
-        alert('Inserção no final falhou.');
       }
       renderizarLista();
     }
@@ -369,8 +384,6 @@
       const valorRemovido = lista.removeInicioLista();
       if (valorRemovido !== -1) {
         alert(`Elemento ${valorRemovido} removido do início com sucesso!`);
-      } else {
-        alert('Remoção do início falhou.');
       }
       renderizarLista();
     }
@@ -379,8 +392,6 @@
       const valorRemovido = lista.removeFimLista();
       if (valorRemovido !== -1) {
         alert(`Elemento ${valorRemovido} removido do final com sucesso!`);
-      } else {
-        alert('Remoção do final falhou.');
       }
       renderizarLista();
     }
